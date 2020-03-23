@@ -18,3 +18,43 @@ License
 -------
 
 [0-clause BSD license](LICENSE-0BSD.txt).
+
+
+Standing This Up
+-----------------
+
+* In one terminal: 
+
+```
+openocd -f interface/stlink-v2-1.cfg -f target/stm32f4x.cfg   
+```
+
+* Then in another:
+
+```
+cargo build --target thumbv7em-none-eabihf
+arm-none-eabi-gdb -q target/thumbv7em-none-eabihf/debug/stm32f407g-disc
+```
+
+* Then inside of GDB: 
+
+```
+target remote :3333
+load 
+monitor reset halt
+break main
+continue
+```
+
+* To enter source-review mode:
+
+```
+layout src
+```
+
+Shout-Outs
+---------- 
+
+* https://docs.rust-embedded.org/discovery/index.html - for STM32F*3*
+
+
